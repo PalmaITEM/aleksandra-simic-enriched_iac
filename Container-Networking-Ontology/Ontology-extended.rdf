@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/aleksi/ontologies/2024/ContainerNetworking#"
+     xml:base="http://www.semanticweb.org/aleksi/ontologies/2024/ContainerNetworking"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:terms="http://purl.org/dc/terms/">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/ontologies/2024/ContainerNetworking">
+        <owl:versionIRI rdf:resource="http://www.semanticweb.org/ontologies/2024/ContainerNetworking/2.0.0"/>
+        <dc:creator xml:lang="en">Aleksandra Simic (NTNU)</dc:creator>
+        <rdfs:comment xml:lang="en">This ontology is created as part of the master&apos;s thesis work at NTNU.</rdfs:comment>
+        <owl:versionInfo xml:lang="en">Compared to the version 1.0.0, this version contains properties created for verifying SWRL rules.</owl:versionInfo>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/creator -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/creator"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/date -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/date"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/license -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/license"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://w3id.org/devops-infra/network#belongsToIPNetwork -->
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/devops-infra/network#belongsToIPNetwork">
+        <rdfs:domain rdf:resource="http://w3id.org/devops-infra/network#IPAddress"/>
+        <rdfs:range rdf:resource="http://w3id.org/devops-infra/network#IPNetwork"/>
+        <rdfs:comment xml:lang="en">An IP address belongs to an IP network.</rdfs:comment>
+        <rdfs:label xml:lang="en">belongs to IP network</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2024/ContainerNetworking#hasConnectivityWith -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#hasConnectivityWith">
+        <rdfs:comment xml:lang="en">Services can have connectivity.</rdfs:comment>
+        <rdfs:label xml:lang="en">has connectivity with</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2024/ContainerNetworking#hasIPNetwork -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#hasIPNetwork">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#Service"/>
+        <rdfs:range rdf:resource="http://w3id.org/devops-infra/network#IPNetwork"/>
+        <rdfs:comment xml:lang="en">Service can be connected to a custom network.</rdfs:comment>
+        <rdfs:label xml:lang="en">has IP network</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2024/ContainerNetworking#hasStaticIP -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#hasStaticIP">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#Service"/>
+        <rdfs:range rdf:resource="http://w3id.org/devops-infra/network#IPAddress"/>
+        <rdfs:comment xml:lang="en">Service can have a static IP Address.</rdfs:comment>
+        <rdfs:label xml:lang="en">has static IP</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://w3id.org/devops-infra/network#ipAddressVersion -->
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/devops-infra/network#ipAddressVersion">
+        <rdfs:domain rdf:resource="http://w3id.org/devops-infra/network#IPAddress"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Version of the IP address (e.g., 4, 6)</rdfs:comment>
+        <rdfs:label xml:lang="en">IP address version</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2024/ContainerNetworking#exposesHTTPPortExternally -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#exposesHTTPPortExternally">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#Service"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+        <rdfs:comment xml:lang="en">HTTP port (80) open externally.</rdfs:comment>
+        <rdfs:label xml:lang="en">exposes HTTP port externally</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2024/ContainerNetworking#exposesHTTPPortInternally -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#exposesHTTPPortInternally">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#Service"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+        <rdfs:comment xml:lang="en">HTTP port (80) open internally.</rdfs:comment>
+        <rdfs:label xml:lang="en">exposes HTTP port internally</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2024/ContainerNetworking#exposesPortToHost -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#exposesPortToHost">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#Service"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Exposed port, or a range of ports, to the host.</rdfs:comment>
+        <rdfs:label xml:lang="en">exposes port to host</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2024/ContainerNetworking#exposesPortToServices -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#exposesPortToServices">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#Service"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Exposed port, or a range of ports to other Services.</rdfs:comment>
+        <rdfs:label xml:lang="en">exposes port to services</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2024/ContainerNetworking#hasDefaultIPNetwork -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#hasDefaultIPNetwork">
+        <rdfs:comment xml:lang="en">Default IP network created by Compose.</rdfs:comment>
+        <rdfs:label xml:lang="en">has default IP network</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2024/ContainerNetworking#hasIPAddressValue -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#hasIPAddressValue">
+        <rdfs:domain rdf:resource="http://w3id.org/devops-infra/network#IPAddress"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">IP Address in a string format.</rdfs:comment>
+        <rdfs:label xml:lang="en">has IP address value</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2024/ContainerNetworking#hasSubnet -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#hasSubnet">
+        <rdfs:domain rdf:resource="http://w3id.org/devops-infra/network#IPNetwork"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">IP address range.</rdfs:comment>
+        <rdfs:label xml:lang="en">has subnet</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2024/ContainerNetworking#nonCompliance -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#nonCompliance">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#Service"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+        <rdfs:comment xml:lang="en">Non-compliance of services.</rdfs:comment>
+        <rdfs:label xml:lang="en">non-compliance</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://w3id.org/devops-infra/core#ConfigurationItem -->
+
+    <owl:Class rdf:about="http://w3id.org/devops-infra/core#ConfigurationItem">
+        <rdfs:comment xml:lang="en">A Configuration Item identifies an entity (Resource) or a group of entities (Resource Group) that are managed in the context of a DevOps infrastructure in this ontology network.</rdfs:comment>
+        <rdfs:label xml:lang="en">Configuration Item</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://w3id.org/devops-infra/core#Resource -->
+
+    <owl:Class rdf:about="http://w3id.org/devops-infra/core#Resource">
+        <rdfs:subClassOf rdf:resource="http://w3id.org/devops-infra/core#ConfigurationItem"/>
+        <rdfs:comment xml:lang="en">A Resource is any relevant entity that is managed in the context of a DevOps infrastructure in this ontology network. This term is also known as a Configuration Item in many Configuration Management Databases.</rdfs:comment>
+        <rdfs:label xml:lang="en">Resource</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://w3id.org/devops-infra/network#IPAddress -->
+
+    <owl:Class rdf:about="http://w3id.org/devops-infra/network#IPAddress">
+        <rdfs:subClassOf rdf:resource="http://w3id.org/devops-infra/core#Resource"/>
+        <rdfs:comment xml:lang="en">An Internet Protocol address (IP address) is a numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication. An IP address serves two main functions: host or network interface identification and location addressing.</rdfs:comment>
+        <rdfs:label xml:lang="en">IP Address</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://w3id.org/devops-infra/network#IPNetwork -->
+
+    <owl:Class rdf:about="http://w3id.org/devops-infra/network#IPNetwork">
+        <rdfs:subClassOf rdf:resource="http://w3id.org/devops-infra/core#Resource"/>
+        <rdfs:comment xml:lang="en">An IP network is a communication network that uses Internet Protocol (IP) to send and receive messages between one or more computers. As one of the most commonly used global networks, an IP network is implemented in Internet networks, local area networks (LAN) and enterprise networks. An IP network requires that all hosts or network nodes be configured with the TCP/IP suite.</rdfs:comment>
+        <rdfs:label xml:lang="en">IP Network</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2024/ContainerNetworking#Service -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#Service">
+        <rdfs:subClassOf rdf:resource="http://w3id.org/devops-infra/core#Resource"/>
+        <rdfs:comment xml:lang="en">A Service represents the abstract definition of a container in a Docker Compose file.</rdfs:comment>
+        <rdfs:label xml:lang="en">Service</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://w3id.org/devops-infra/network#IPAddress"/>
+            <rdf:Description rdf:about="http://w3id.org/devops-infra/network#IPNetwork"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2024/ContainerNetworking#Service"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi -->
+

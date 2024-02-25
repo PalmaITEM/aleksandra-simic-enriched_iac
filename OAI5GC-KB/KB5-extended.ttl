@@ -1,0 +1,743 @@
+@prefix : <http://www.semanticweb.org/ontologies/2024/ContainerNetworking#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix netw: <http://w3id.org/devops-infra/network#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix x_1.1: <http://purl.org/dc/elements/1.1/> .
+@base <http://www.semanticweb.org/ontologies/2024/ContainerNetworking#> .
+
+<http://www.semanticweb.org/ontologies/2024/ContainerNetworking> rdf:type owl:Ontology ;
+                                                                  owl:versionIRI <http://www.semanticweb.org/ontologies/2024/ContainerNetworking/2.0.0> ;
+                                                                  x_1.1:creator "Aleksandra Simic (NTNU)"@en ;
+                                                                  rdfs:comment "This ontology is created as part of the master's thesis work at NTNU."@en ;
+                                                                  owl:versionInfo "Compared to the version 1.0.0, this version contains properties created for verifying SWRL rules."@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/creator
+x_1.1:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/date
+x_1.1:date rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/license
+<http://purl.org/dc/terms/license> rdf:type owl:AnnotationProperty .
+
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+<http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://w3id.org/devops-infra/network#belongsToIPNetwork
+netw:belongsToIPNetwork rdf:type owl:ObjectProperty ;
+                        rdfs:domain netw:IPAddress ;
+                        rdfs:range netw:IPNetwork ;
+                        rdfs:comment "An IP address belongs to an IP network."@en ;
+                        rdfs:label "belongs to IP network"@en .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#hasConnectivityWith
+:hasConnectivityWith rdf:type owl:ObjectProperty ;
+                     rdfs:comment "Services can have connectivity."@en ;
+                     rdfs:label "has connectivity with"@en .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#hasIPNetwork
+:hasIPNetwork rdf:type owl:ObjectProperty ;
+              rdfs:domain :Service ;
+              rdfs:range netw:IPNetwork ;
+              rdfs:comment "Service can be connected to a custom network."@en ;
+              rdfs:label "has IP network"@en .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#hasStaticIP
+:hasStaticIP rdf:type owl:ObjectProperty ;
+             rdfs:domain :Service ;
+             rdfs:range netw:IPAddress ;
+             rdfs:comment "Service can have a static IP Address."@en ;
+             rdfs:label "has static IP"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://w3id.org/devops-infra/network#ipAddressVersion
+netw:ipAddressVersion rdf:type owl:DatatypeProperty ;
+                      rdfs:domain netw:IPAddress ;
+                      rdfs:range xsd:string ;
+                      rdfs:comment "Version of the IP address (e.g., 4, 6)"@en ;
+                      rdfs:label "IP address version"@en .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#exposesHTTPPortExternally
+:exposesHTTPPortExternally rdf:type owl:DatatypeProperty ;
+                           rdfs:domain :Service ;
+                           rdfs:range xsd:boolean ;
+                           rdfs:comment "HTTP port (80) open externally."@en ;
+                           rdfs:label "exposes HTTP port externally"@en .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#exposesHTTPPortInternally
+:exposesHTTPPortInternally rdf:type owl:DatatypeProperty ;
+                           rdfs:domain :Service ;
+                           rdfs:range xsd:boolean ;
+                           rdfs:comment "HTTP port (80) open internally."@en ;
+                           rdfs:label "exposes HTTP port internally"@en .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#exposesPortToHost
+:exposesPortToHost rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :Service ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "Exposed port, or a range of ports, to the host."@en ;
+                   rdfs:label "exposes port to host"@en .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#exposesPortToServices
+:exposesPortToServices rdf:type owl:DatatypeProperty ;
+                       rdfs:domain :Service ;
+                       rdfs:range xsd:string ;
+                       rdfs:comment "Exposed port, or a range of ports to other Services."@en ;
+                       rdfs:label "exposes port to services"@en .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#hasDefaultIPNetwork
+:hasDefaultIPNetwork rdf:type owl:DatatypeProperty ;
+                     rdfs:comment "Default IP network created by Compose."@en ;
+                     rdfs:label "has default IP network"@en .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#hasIPAddressValue
+:hasIPAddressValue rdf:type owl:DatatypeProperty ;
+                   rdfs:domain netw:IPAddress ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "IP Address in a string format."@en ;
+                   rdfs:label "has IP address value"@en .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#hasSubnet
+:hasSubnet rdf:type owl:DatatypeProperty ;
+           rdfs:domain netw:IPNetwork ;
+           rdfs:range xsd:string ;
+           rdfs:comment "IP address range."@en ;
+           rdfs:label "has subnet"@en .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#nonCompliance
+:nonCompliance rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Service ;
+               rdfs:range xsd:boolean ;
+               rdfs:comment "Non-compliance of services."@en ;
+               rdfs:label "non-compliance"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://w3id.org/devops-infra/core#ConfigurationItem
+<http://w3id.org/devops-infra/core#ConfigurationItem> rdf:type owl:Class ;
+                                                      rdfs:comment "A Configuration Item identifies an entity (Resource) or a group of entities (Resource Group) that are managed in the context of a DevOps infrastructure in this ontology network."@en ;
+                                                      rdfs:label "Configuration Item"@en .
+
+
+###  http://w3id.org/devops-infra/core#Resource
+<http://w3id.org/devops-infra/core#Resource> rdf:type owl:Class ;
+                                             rdfs:subClassOf <http://w3id.org/devops-infra/core#ConfigurationItem> ;
+                                             rdfs:comment "A Resource is any relevant entity that is managed in the context of a DevOps infrastructure in this ontology network. This term is also known as a Configuration Item in many Configuration Management Databases."@en ;
+                                             rdfs:label "Resource"@en .
+
+
+###  http://w3id.org/devops-infra/network#IPAddress
+netw:IPAddress rdf:type owl:Class ;
+               rdfs:subClassOf <http://w3id.org/devops-infra/core#Resource> ;
+               rdfs:comment "An Internet Protocol address (IP address) is a numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication. An IP address serves two main functions: host or network interface identification and location addressing."@en ;
+               rdfs:label "IP Address"@en .
+
+
+###  http://w3id.org/devops-infra/network#IPNetwork
+netw:IPNetwork rdf:type owl:Class ;
+               rdfs:subClassOf <http://w3id.org/devops-infra/core#Resource> ;
+               rdfs:comment "An IP network is a communication network that uses Internet Protocol (IP) to send and receive messages between one or more computers. As one of the most commonly used global networks, an IP network is implemented in Internet networks, local area networks (LAN) and enterprise networks. An IP network requires that all hosts or network nodes be configured with the TCP/IP suite."@en ;
+               rdfs:label "IP Network"@en .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#Service
+:Service rdf:type owl:Class ;
+         rdfs:subClassOf <http://w3id.org/devops-infra/core#Resource> ;
+         rdfs:comment "A Service represents the abstract definition of a container in a Docker Compose file."@en ;
+         rdfs:label "Service"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://w3id.org/devops-infra/network#public_net
+netw:public_net rdf:type owl:NamedIndividual ,
+                         netw:IPNetwork ;
+                :hasSubnet "192.168.70.128/26" .
+
+
+###  http://w3id.org/devops-infra/network#192.168.70.130
+<http://w3id.org/devops-infra/network#192.168.70.130> rdf:type owl:NamedIndividual ,
+                                                               netw:IPAddress ;
+                                                      netw:belongsToIPNetwork netw:public_net ;
+                                                      netw:ipAddressVersion "4" ;
+                                                      :hasIPAddressValue "192.168.70.130" .
+
+
+###  http://w3id.org/devops-infra/network#192.168.70.131
+<http://w3id.org/devops-infra/network#192.168.70.131> rdf:type owl:NamedIndividual ,
+                                                               netw:IPAddress ;
+                                                      netw:belongsToIPNetwork netw:public_net ;
+                                                      netw:ipAddressVersion "4" ;
+                                                      :hasIPAddressValue "192.168.70.131" .
+
+
+###  http://w3id.org/devops-infra/network#192.168.70.132
+<http://w3id.org/devops-infra/network#192.168.70.132> rdf:type owl:NamedIndividual ,
+                                                               netw:IPAddress ;
+                                                      netw:belongsToIPNetwork netw:public_net ;
+                                                      netw:ipAddressVersion "4" ;
+                                                      :hasIPAddressValue "192.168.70.132" .
+
+
+###  http://w3id.org/devops-infra/network#192.168.70.133
+<http://w3id.org/devops-infra/network#192.168.70.133> rdf:type owl:NamedIndividual ,
+                                                               netw:IPAddress ;
+                                                      netw:belongsToIPNetwork netw:public_net ;
+                                                      netw:ipAddressVersion "4" ;
+                                                      :hasIPAddressValue "192.168.70.133" .
+
+
+###  http://w3id.org/devops-infra/network#192.168.70.134
+<http://w3id.org/devops-infra/network#192.168.70.134> rdf:type owl:NamedIndividual ,
+                                                               netw:IPAddress ;
+                                                      netw:belongsToIPNetwork netw:public_net ;
+                                                      netw:ipAddressVersion "4" ;
+                                                      :hasIPAddressValue "192.168.70.134" .
+
+
+###  http://w3id.org/devops-infra/network#192.168.70.135
+<http://w3id.org/devops-infra/network#192.168.70.135> rdf:type owl:NamedIndividual ,
+                                                               netw:IPAddress ;
+                                                      netw:belongsToIPNetwork netw:public_net ;
+                                                      netw:ipAddressVersion "4" ;
+                                                      :hasIPAddressValue "192.168.70.135" .
+
+
+###  http://w3id.org/devops-infra/network#192.168.70.136
+<http://w3id.org/devops-infra/network#192.168.70.136> rdf:type owl:NamedIndividual ,
+                                                               netw:IPAddress ;
+                                                      netw:belongsToIPNetwork netw:public_net ;
+                                                      netw:ipAddressVersion "4" ;
+                                                      :hasIPAddressValue "192.168.70.136" .
+
+
+###  http://w3id.org/devops-infra/network#192.168.70.137
+<http://w3id.org/devops-infra/network#192.168.70.137> rdf:type owl:NamedIndividual ,
+                                                               netw:IPAddress ;
+                                                      netw:belongsToIPNetwork netw:public_net ;
+                                                      netw:ipAddressVersion "4" ;
+                                                      :hasIPAddressValue "192.168.70.137" .
+
+
+###  http://w3id.org/devops-infra/network#192.168.70.138
+<http://w3id.org/devops-infra/network#192.168.70.138> rdf:type owl:NamedIndividual ,
+                                                               netw:IPAddress ;
+                                                      netw:belongsToIPNetwork netw:public_net ;
+                                                      netw:ipAddressVersion "4" ;
+                                                      :hasIPAddressValue "192.168.70.138" .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#mysql
+:mysql rdf:type owl:NamedIndividual ,
+                :Service ;
+       owl:differentFrom :oai-amf ,
+                         :oai-ausf ,
+                         :oai-ext-dn ,
+                         :oai-nrf ,
+                         :oai-smf ,
+                         :oai-udm ,
+                         :oai-udr ,
+                         :oai-upf ;
+       :hasIPNetwork netw:public_net ;
+       :hasStaticIP <http://w3id.org/devops-infra/network#192.168.70.131> .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#oai-amf
+:oai-amf rdf:type owl:NamedIndividual ,
+                  :Service ;
+         owl:differentFrom :oai-ausf ,
+                           :oai-ext-dn ,
+                           :oai-nrf ,
+                           :oai-smf ,
+                           :oai-udm ,
+                           :oai-udr ,
+                           :oai-upf ;
+         :hasIPNetwork netw:public_net ;
+         :hasStaticIP <http://w3id.org/devops-infra/network#192.168.70.132> ;
+         :exposesPortToServices "38412/sctp" ,
+                                "80/tcp" ,
+                                "8080/tcp" .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#oai-ausf
+:oai-ausf rdf:type owl:NamedIndividual ,
+                   :Service ;
+          owl:differentFrom :oai-ext-dn ,
+                            :oai-nrf ,
+                            :oai-smf ,
+                            :oai-udm ,
+                            :oai-udr ,
+                            :oai-upf ;
+          :hasIPNetwork netw:public_net ;
+          :hasStaticIP <http://w3id.org/devops-infra/network#192.168.70.138> ;
+          :exposesPortToServices "80/tcp" ,
+                                 "8080/tcp" .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#oai-ext-dn
+:oai-ext-dn rdf:type owl:NamedIndividual ,
+                     :Service ;
+            owl:differentFrom :oai-nrf ,
+                              :oai-smf ,
+                              :oai-udm ,
+                              :oai-udr ,
+                              :oai-upf ;
+            :hasIPNetwork netw:public_net ;
+            :hasStaticIP <http://w3id.org/devops-infra/network#192.168.70.135> .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#oai-nrf
+:oai-nrf rdf:type owl:NamedIndividual ,
+                  :Service ;
+         owl:differentFrom :oai-smf ,
+                           :oai-udm ,
+                           :oai-udr ,
+                           :oai-upf ;
+         :hasIPNetwork netw:public_net ;
+         :hasStaticIP <http://w3id.org/devops-infra/network#192.168.70.130> ;
+         :exposesPortToServices "80/tcp" ,
+                                "8080/tcp" .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#oai-smf
+:oai-smf rdf:type owl:NamedIndividual ,
+                  :Service ;
+         owl:differentFrom :oai-udm ,
+                           :oai-udr ,
+                           :oai-upf ;
+         :hasIPNetwork netw:public_net ;
+         :hasStaticIP <http://w3id.org/devops-infra/network#192.168.70.133> ;
+         :exposesPortToServices "80/tcp" ,
+                                "8080/tcp" ,
+                                "8805/udp" .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#oai-udm
+:oai-udm rdf:type owl:NamedIndividual ,
+                  :Service ;
+         owl:differentFrom :oai-udr ,
+                           :oai-upf ;
+         :hasIPNetwork netw:public_net ;
+         :hasStaticIP <http://w3id.org/devops-infra/network#192.168.70.137> ;
+         :exposesPortToServices "80/tcp" ,
+                                "8080/tcp" .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#oai-udr
+:oai-udr rdf:type owl:NamedIndividual ,
+                  :Service ;
+         owl:differentFrom :oai-upf ;
+         :hasIPNetwork netw:public_net ;
+         :hasStaticIP <http://w3id.org/devops-infra/network#192.168.70.136> ;
+         :exposesPortToServices "80/tcp" ,
+                                "8080/tcp" .
+
+
+###  http://www.semanticweb.org/ontologies/2024/ContainerNetworking#oai-upf
+:oai-upf rdf:type owl:NamedIndividual ,
+                  :Service ;
+         :hasIPNetwork netw:public_net ;
+         :hasStaticIP <http://w3id.org/devops-infra/network#192.168.70.134> ;
+         :exposesPortToServices "2152/udp" ,
+                                "8805/udp" .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( netw:IPAddress
+                netw:IPNetwork
+                :Service
+              )
+] .
+
+
+#################################################################
+#    Rules
+#################################################################
+
+:x rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:y rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:s rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:p rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "Default Compose Network" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Service ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasIPNetwork ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> :y
+                                                                ] ;
+                                                      rdf:rest rdf:nil
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasDefaultIPNetwork ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> "false"^^xsd:boolean
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "Exposed HTTP Port Externally" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Service ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :exposesPortToHost ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> :p
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#equal> ;
+                                                                             <http://www.w3.org/2003/11/swrl#arguments> [ rdf:type rdf:List ;
+                                                                                                                          rdf:first :p ;
+                                                                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                     rdf:first "80" ;
+                                                                                                                                     rdf:rest rdf:nil
+                                                                                                                                   ]
+                                                                                                                        ]
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :exposesHTTPPortExternally ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> "true"^^xsd:boolean
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "Exposed HTTP Port Externally tcp" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Service ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :exposesPortToHost ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> :p
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#equal> ;
+                                                                             <http://www.w3.org/2003/11/swrl#arguments> [ rdf:type rdf:List ;
+                                                                                                                          rdf:first :p ;
+                                                                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                     rdf:first "80/tcp" ;
+                                                                                                                                     rdf:rest rdf:nil
+                                                                                                                                   ]
+                                                                                                                        ]
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :exposesHTTPPortExternally ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> "true"^^xsd:boolean
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "Compliance Check ext" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Service ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :exposesPortToHost ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> :p
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#notEqual> ;
+                                                                             <http://www.w3.org/2003/11/swrl#arguments> [ rdf:type rdf:List ;
+                                                                                                                          rdf:first :p ;
+                                                                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                     rdf:first "443" ;
+                                                                                                                                     rdf:rest rdf:nil
+                                                                                                                                   ]
+                                                                                                                        ]
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#notEqual> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#arguments> [ rdf:type rdf:List ;
+                                                                                                                                     rdf:first :p ;
+                                                                                                                                     rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                rdf:first "443/tcp" ;
+                                                                                                                                                rdf:rest rdf:nil
+                                                                                                                                              ]
+                                                                                                                                   ]
+                                                                                      ] ;
+                                                                            rdf:rest rdf:nil
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :nonCompliance ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> "true"^^xsd:boolean
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "Connectivity between Services" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Service ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :Service ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :y
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasIPNetwork ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> :s
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasIPNetwork ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> :y ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> :s
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> :y
+                                                                                                 ] ;
+                                                                                       rdf:rest rdf:nil
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasConnectivityWith ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :y
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "Exposed HTTP Port Internally" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Service ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :exposesPortToServices ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> :p
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#equal> ;
+                                                                             <http://www.w3.org/2003/11/swrl#arguments> [ rdf:type rdf:List ;
+                                                                                                                          rdf:first :p ;
+                                                                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                     rdf:first "80" ;
+                                                                                                                                     rdf:rest rdf:nil
+                                                                                                                                   ]
+                                                                                                                        ]
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :exposesHTTPPortInternally ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> "true"^^xsd:boolean
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "Exposed HTTP Port Internally tcp" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Service ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :exposesPortToServices ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> :p
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#equal> ;
+                                                                             <http://www.w3.org/2003/11/swrl#arguments> [ rdf:type rdf:List ;
+                                                                                                                          rdf:first :p ;
+                                                                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                     rdf:first "80/tcp" ;
+                                                                                                                                     rdf:rest rdf:nil
+                                                                                                                                   ]
+                                                                                                                        ]
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :exposesHTTPPortInternally ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> "true"^^xsd:boolean
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "Compliance Check" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Service ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :exposesPortToServices ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> :p
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#notEqual> ;
+                                                                             <http://www.w3.org/2003/11/swrl#arguments> [ rdf:type rdf:List ;
+                                                                                                                          rdf:first :p ;
+                                                                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                     rdf:first "80" ;
+                                                                                                                                     rdf:rest rdf:nil
+                                                                                                                                   ]
+                                                                                                                        ]
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#notEqual> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#arguments> [ rdf:type rdf:List ;
+                                                                                                                                     rdf:first :p ;
+                                                                                                                                     rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                rdf:first "80/tcp" ;
+                                                                                                                                                rdf:rest rdf:nil
+                                                                                                                                              ]
+                                                                                                                                   ]
+                                                                                      ] ;
+                                                                            rdf:rest rdf:nil
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :nonCompliance ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :x ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> "true"^^xsd:boolean
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi

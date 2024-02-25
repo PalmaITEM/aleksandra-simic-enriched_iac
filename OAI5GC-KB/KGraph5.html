@@ -1,0 +1,274 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+             #loadingBar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width: 100%;
+                 height: 600px;
+                 background-color:rgba(200,200,200,0.8);
+                 -webkit-transition: all 0.5s ease;
+                 -moz-transition: all 0.5s ease;
+                 -ms-transition: all 0.5s ease;
+                 -o-transition: all 0.5s ease;
+                 transition: all 0.5s ease;
+                 opacity:1;
+             }
+
+             #bar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width:20px;
+                 height:20px;
+                 margin:auto auto auto auto;
+                 border-radius:11px;
+                 border:2px solid rgba(30,30,30,0.05);
+                 background: rgb(0, 173, 246); /* Old browsers */
+                 box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+             }
+
+             #border {
+                 position:absolute;
+                 top:10px;
+                 left:10px;
+                 width:500px;
+                 height:23px;
+                 margin:auto auto auto auto;
+                 box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+                 border-radius:10px;
+             }
+
+             #text {
+                 position:absolute;
+                 top:8px;
+                 left:530px;
+                 width:30px;
+                 height:50px;
+                 margin:auto auto auto auto;
+                 font-size:22px;
+                 color: #000000;
+             }
+
+             div.outerBorder {
+                 position:relative;
+                 top:400px;
+                 width:600px;
+                 height:44px;
+                 margin:auto auto auto auto;
+                 border:8px solid rgba(0,0,0,0.1);
+                 background: rgb(252,252,252); /* Old browsers */
+                 background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+                 background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+                 background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+                 background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+                 background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+                 border-radius:72px;
+                 box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+             }
+             
+
+             
+             #config {
+                 float: left;
+                 width: 400px;
+                 height: 600px;
+             }
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+            <div id="loadingBar">
+              <div class="outerBorder">
+                <div id="text">0%</div>
+                <div id="border">
+                  <div id="bar"></div>
+                </div>
+              </div>
+            </div>
+        
+        
+            <div id="config"></div>
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "id": 0, "label": ":hasIPNetwork", "shape": "dot", "title": ":hasIPNetwork"}, {"color": "#97c2fc", "id": 1, "label": "has IP network", "shape": "dot", "title": "has IP network"}, {"color": "#97c2fc", "id": 2, "label": ":oai-nrf", "shape": "dot", "title": ":oai-nrf"}, {"color": "#97c2fc", "id": 3, "label": ":oai-smf", "shape": "dot", "title": ":oai-smf"}, {"color": "#97c2fc", "id": 4, "label": ":exposesHTTPPortInternally", "shape": "dot", "title": ":exposesHTTPPortInternally"}, {"color": "#97c2fc", "id": 5, "label": "xsd:boolean", "shape": "dot", "title": "xsd:boolean"}, {"color": "green", "id": 6, "label": "netw:IPNetwork", "shape": "dot", "size": 30, "title": "netw:IPNetwork"}, {"color": "#97c2fc", "id": 7, "label": "owl:Class", "shape": "dot", "title": "owl:Class"}, {"color": "#97c2fc", "id": 8, "label": ":oai-amf", "shape": "dot", "title": ":oai-amf"}, {"color": "#97c2fc", "id": 9, "label": "38412/sctp", "shape": "dot", "title": "38412/sctp"}, {"color": "#97c2fc", "id": 10, "label": ":mysql", "shape": "dot", "title": ":mysql"}, {"color": "#97c2fc", "id": 11, "label": ":oai-upf", "shape": "dot", "title": ":oai-upf"}, {"color": "green", "id": 12, "label": "netw:IPAddress", "shape": "dot", "size": 30, "title": "netw:IPAddress"}, {"color": "#97c2fc", "id": 13, "label": "\u003chttp://w3id.org/devops-infra/core#Resource\u003e", "shape": "dot", "title": "\u003chttp://w3id.org/devops-infra/core#Resource\u003e"}, {"color": "#97c2fc", "id": 14, "label": ":hasStaticIP", "shape": "dot", "title": ":hasStaticIP"}, {"color": "#97c2fc", "id": 15, "label": "owl:ObjectProperty", "shape": "dot", "title": "owl:ObjectProperty"}, {"color": "green", "id": 16, "label": "netw:192.168.70.130", "shape": "dot", "size": 30, "title": "netw:192.168.70.130"}, {"color": "#97c2fc", "id": 17, "label": "owl:NamedIndividual", "shape": "dot", "title": "owl:NamedIndividual"}, {"color": "green", "id": 18, "label": "netw:192.168.70.133", "shape": "dot", "size": 30, "title": "netw:192.168.70.133"}, {"color": "#97c2fc", "id": 19, "label": "Service can be connected to a custom network.", "shape": "dot", "title": "Service can be connected to a custom network."}, {"color": "#97c2fc", "id": 20, "label": ":hasSubnet", "shape": "dot", "title": ":hasSubnet"}, {"color": "#97c2fc", "id": 21, "label": "has subnet", "shape": "dot", "title": "has subnet"}, {"color": "green", "id": 22, "label": "netw:192.168.70.136", "shape": "dot", "size": 30, "title": "netw:192.168.70.136"}, {"color": "#97c2fc", "id": 23, "label": "4", "shape": "dot", "title": "4"}, {"color": "#97c2fc", "id": 24, "label": ":Service", "shape": "dot", "title": ":Service"}, {"color": "#97c2fc", "id": 25, "label": ":exposesPortToHost", "shape": "dot", "title": ":exposesPortToHost"}, {"color": "#97c2fc", "id": 26, "label": "owl:DatatypeProperty", "shape": "dot", "title": "owl:DatatypeProperty"}, {"color": "#97c2fc", "id": 27, "label": ":oai-udm", "shape": "dot", "title": ":oai-udm"}, {"color": "#97c2fc", "id": 28, "label": "x_1.1:creator", "shape": "dot", "title": "x_1.1:creator"}, {"color": "#97c2fc", "id": 29, "label": "owl:AnnotationProperty", "shape": "dot", "title": "owl:AnnotationProperty"}, {"color": "green", "id": 30, "label": "netw:belongsToIPNetwork", "shape": "dot", "size": 30, "title": "netw:belongsToIPNetwork"}, {"color": "#97c2fc", "id": 31, "label": "\u003chttp://w3id.org/devops-infra/core#ConfigurationItem\u003e", "shape": "dot", "title": "\u003chttp://w3id.org/devops-infra/core#ConfigurationItem\u003e"}, {"color": "#97c2fc", "id": 32, "label": "Configuration Item", "shape": "dot", "title": "Configuration Item"}, {"color": "green", "id": 33, "label": "netw:192.168.70.131", "shape": "dot", "size": 30, "title": "netw:192.168.70.131"}, {"color": "green", "id": 34, "label": "netw:192.168.70.138", "shape": "dot", "size": 30, "title": "netw:192.168.70.138"}, {"color": "#97c2fc", "id": 35, "label": "192.168.70.138", "shape": "dot", "title": "192.168.70.138"}, {"color": "#97c2fc", "id": 36, "label": ":hasIPAddressValue", "shape": "dot", "title": ":hasIPAddressValue"}, {"color": "#97c2fc", "id": 37, "label": ":oai-ausf", "shape": "dot", "title": ":oai-ausf"}, {"color": "#97c2fc", "id": 38, "label": ":oai-ext-dn", "shape": "dot", "title": ":oai-ext-dn"}, {"color": "green", "id": 39, "label": "netw:192.168.70.135", "shape": "dot", "size": 30, "title": "netw:192.168.70.135"}, {"color": "#97c2fc", "id": 40, "label": "A Resource is any relevant entity that is managed in the context of a DevOps infrastructure in this ontology network. This term is also known as a Configuration Item in many Configuration Management Databases.", "shape": "dot", "title": "A Resource is any relevant entity that is managed in the context of a DevOps infrastructure in this ontology network. This term is also known as a Configuration Item in many Configuration Management Databases."}, {"color": "green", "id": 41, "label": "netw:ipAddressVersion", "shape": "dot", "size": 30, "title": "netw:ipAddressVersion"}, {"color": "#97c2fc", "id": 42, "label": "Version of the IP address (e.g., 4, 6)", "shape": "dot", "title": "Version of the IP address (e.g., 4, 6)"}, {"color": "green", "id": 43, "label": "netw:public_net", "shape": "dot", "size": 30, "title": "netw:public_net"}, {"color": "#97c2fc", "id": 44, "label": "Exposed port, or a range of ports, to the host.", "shape": "dot", "title": "Exposed port, or a range of ports, to the host."}, {"color": "#97c2fc", "id": 45, "label": "192.168.70.136", "shape": "dot", "title": "192.168.70.136"}, {"color": "#97c2fc", "id": 46, "label": "belongs to IP network", "shape": "dot", "title": "belongs to IP network"}, {"color": "#97c2fc", "id": 47, "label": "HTTP port (80) open internally.", "shape": "dot", "title": "HTTP port (80) open internally."}, {"color": "#97c2fc", "id": 48, "label": "exposes port to host", "shape": "dot", "title": "exposes port to host"}, {"color": "#97c2fc", "id": 49, "label": "\u003chttp://www.semanticweb.org/ontologies/2024/ContainerNetworking\u003e", "shape": "dot", "title": "\u003chttp://www.semanticweb.org/ontologies/2024/ContainerNetworking\u003e"}, {"color": "#97c2fc", "id": 50, "label": "Aleksandra Simic (NTNU)", "shape": "dot", "title": "Aleksandra Simic (NTNU)"}, {"color": "#97c2fc", "id": 51, "label": ":nonCompliance", "shape": "dot", "title": ":nonCompliance"}, {"color": "#97c2fc", "id": 52, "label": "80/tcp", "shape": "dot", "title": "80/tcp"}, {"color": "green", "id": 53, "label": "netw:192.168.70.137", "shape": "dot", "size": 30, "title": "netw:192.168.70.137"}, {"color": "#97c2fc", "id": 54, "label": "IP address range.", "shape": "dot", "title": "IP address range."}, {"color": "#97c2fc", "id": 55, "label": "_:n4a409b368ccf45d9a831ea7037f1d9a8b4", "shape": "dot", "title": "_:n4a409b368ccf45d9a831ea7037f1d9a8b4"}, {"color": "#97c2fc", "id": 56, "label": "rdf:nil", "shape": "dot", "title": "rdf:nil"}, {"color": "#97c2fc", "id": 57, "label": ":hasConnectivityWith", "shape": "dot", "title": ":hasConnectivityWith"}, {"color": "#97c2fc", "id": 58, "label": "has connectivity with", "shape": "dot", "title": "has connectivity with"}, {"color": "#97c2fc", "id": 59, "label": ":oai-udr", "shape": "dot", "title": ":oai-udr"}, {"color": "#97c2fc", "id": 60, "label": "dct:license", "shape": "dot", "title": "dct:license"}, {"color": "#97c2fc", "id": 61, "label": "IP address version", "shape": "dot", "title": "IP address version"}, {"color": "#97c2fc", "id": 62, "label": ":exposesHTTPPortExternally", "shape": "dot", "title": ":exposesHTTPPortExternally"}, {"color": "#97c2fc", "id": 63, "label": "192.168.70.131", "shape": "dot", "title": "192.168.70.131"}, {"color": "#97c2fc", "id": 64, "label": "8080/tcp", "shape": "dot", "title": "8080/tcp"}, {"color": "#97c2fc", "id": 65, "label": "Services can have connectivity.", "shape": "dot", "title": "Services can have connectivity."}, {"color": "#97c2fc", "id": 66, "label": ":hasDefaultIPNetwork", "shape": "dot", "title": ":hasDefaultIPNetwork"}, {"color": "#97c2fc", "id": 67, "label": "has default IP network", "shape": "dot", "title": "has default IP network"}, {"color": "#97c2fc", "id": 68, "label": "IP Address in a string format.", "shape": "dot", "title": "IP Address in a string format."}, {"color": "green", "id": 69, "label": "netw:192.168.70.132", "shape": "dot", "size": 30, "title": "netw:192.168.70.132"}, {"color": "#97c2fc", "id": 70, "label": "non-compliance", "shape": "dot", "title": "non-compliance"}, {"color": "#97c2fc", "id": 71, "label": "An IP network is a communication network that uses Internet Protocol (IP) to send and receive messages between one or more computers. As one of the most commonly used global networks, an IP network is implemented in Internet networks, local area networks (LAN) and enterprise networks. An IP network requires that all hosts or network nodes be configured with the TCP/IP suite.", "shape": "dot", "title": "An IP network is a communication network that uses Internet Protocol (IP) to send and receive messages between one or more computers. As one of the most commonly used global networks, an IP network is implemented in Internet networks, local area networks (LAN) and enterprise networks. An IP network requires that all hosts or network nodes be configured with the TCP/IP suite."}, {"color": "#97c2fc", "id": 72, "label": "192.168.70.137", "shape": "dot", "title": "192.168.70.137"}, {"color": "#97c2fc", "id": 73, "label": "IP Network", "shape": "dot", "title": "IP Network"}, {"color": "#97c2fc", "id": 74, "label": "xsd:string", "shape": "dot", "title": "xsd:string"}, {"color": "#97c2fc", "id": 75, "label": "_:n4a409b368ccf45d9a831ea7037f1d9a8b1", "shape": "dot", "title": "_:n4a409b368ccf45d9a831ea7037f1d9a8b1"}, {"color": "#97c2fc", "id": 76, "label": "_:n4a409b368ccf45d9a831ea7037f1d9a8b2", "shape": "dot", "title": "_:n4a409b368ccf45d9a831ea7037f1d9a8b2"}, {"color": "#97c2fc", "id": 77, "label": "192.168.70.128/26", "shape": "dot", "title": "192.168.70.128/26"}, {"color": "#97c2fc", "id": 78, "label": "192.168.70.130", "shape": "dot", "title": "192.168.70.130"}, {"color": "#97c2fc", "id": 79, "label": ":exposesPortToServices", "shape": "dot", "title": ":exposesPortToServices"}, {"color": "#97c2fc", "id": 80, "label": "exposes port to services", "shape": "dot", "title": "exposes port to services"}, {"color": "#97c2fc", "id": 81, "label": "Default IP network created by Compose.", "shape": "dot", "title": "Default IP network created by Compose."}, {"color": "#97c2fc", "id": 82, "label": "An IP address belongs to an IP network.", "shape": "dot", "title": "An IP address belongs to an IP network."}, {"color": "#97c2fc", "id": 83, "label": "exposes HTTP port externally", "shape": "dot", "title": "exposes HTTP port externally"}, {"color": "#97c2fc", "id": 84, "label": "8805/udp", "shape": "dot", "title": "8805/udp"}, {"color": "green", "id": 85, "label": "netw:192.168.70.134", "shape": "dot", "size": 30, "title": "netw:192.168.70.134"}, {"color": "#97c2fc", "id": 86, "label": "Non-compliance of services.", "shape": "dot", "title": "Non-compliance of services."}, {"color": "#97c2fc", "id": 87, "label": "has static IP", "shape": "dot", "title": "has static IP"}, {"color": "#97c2fc", "id": 88, "label": "This ontology is created as part of the master\u0027s thesis work at NTNU.", "shape": "dot", "title": "This ontology is created as part of the master\u0027s thesis work at NTNU."}, {"color": "#97c2fc", "id": 89, "label": "A Service represents the abstract definition of a container in a Docker Compose file.", "shape": "dot", "title": "A Service represents the abstract definition of a container in a Docker Compose file."}, {"color": "#97c2fc", "id": 90, "label": "HTTP port (80) open externally.", "shape": "dot", "title": "HTTP port (80) open externally."}, {"color": "#97c2fc", "id": 91, "label": "_:n4a409b368ccf45d9a831ea7037f1d9a8b3", "shape": "dot", "title": "_:n4a409b368ccf45d9a831ea7037f1d9a8b3"}, {"color": "#97c2fc", "id": 92, "label": "x_1.1:date", "shape": "dot", "title": "x_1.1:date"}, {"color": "#97c2fc", "id": 93, "label": "has IP address value", "shape": "dot", "title": "has IP address value"}, {"color": "#97c2fc", "id": 94, "label": "exposes HTTP port internally", "shape": "dot", "title": "exposes HTTP port internally"}, {"color": "#97c2fc", "id": 95, "label": "192.168.70.132", "shape": "dot", "title": "192.168.70.132"}, {"color": "#97c2fc", "id": 96, "label": "owl:AllDisjointClasses", "shape": "dot", "title": "owl:AllDisjointClasses"}, {"color": "#97c2fc", "id": 97, "label": "An Internet Protocol address (IP address) is a numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication. An IP address serves two main functions: host or network interface identification and location addressing.", "shape": "dot", "title": "An Internet Protocol address (IP address) is a numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication. An IP address serves two main functions: host or network interface identification and location addressing."}, {"color": "#97c2fc", "id": 98, "label": "2152/udp", "shape": "dot", "title": "2152/udp"}, {"color": "#97c2fc", "id": 99, "label": "Service can have a static IP Address.", "shape": "dot", "title": "Service can have a static IP Address."}, {"color": "#97c2fc", "id": 100, "label": "192.168.70.134", "shape": "dot", "title": "192.168.70.134"}, {"color": "#97c2fc", "id": 101, "label": "A Configuration Item identifies an entity (Resource) or a group of entities (Resource Group) that are managed in the context of a DevOps infrastructure in this ontology network.", "shape": "dot", "title": "A Configuration Item identifies an entity (Resource) or a group of entities (Resource Group) that are managed in the context of a DevOps infrastructure in this ontology network."}, {"color": "#97c2fc", "id": 102, "label": "owl:Ontology", "shape": "dot", "title": "owl:Ontology"}, {"color": "#97c2fc", "id": 103, "label": "192.168.70.133", "shape": "dot", "title": "192.168.70.133"}, {"color": "#97c2fc", "id": 104, "label": "\u003chttp://www.semanticweb.org/ontologies/2024/ContainerNetworking/2.0.0\u003e", "shape": "dot", "title": "\u003chttp://www.semanticweb.org/ontologies/2024/ContainerNetworking/2.0.0\u003e"}, {"color": "#97c2fc", "id": 105, "label": "IP Address", "shape": "dot", "title": "IP Address"}, {"color": "#97c2fc", "id": 106, "label": "Compared to the version 1.0.0, this version contains properties created for verifying SWRL rules.", "shape": "dot", "title": "Compared to the version 1.0.0, this version contains properties created for verifying SWRL rules."}, {"color": "#97c2fc", "id": 107, "label": "192.168.70.135", "shape": "dot", "title": "192.168.70.135"}, {"color": "#97c2fc", "id": 108, "label": "Service", "shape": "dot", "title": "Service"}, {"color": "#97c2fc", "id": 109, "label": "Exposed port, or a range of ports to other Services.", "shape": "dot", "title": "Exposed port, or a range of ports to other Services."}, {"color": "#97c2fc", "id": 110, "label": "Resource", "shape": "dot", "title": "Resource"}]);
+                  edges = new vis.DataSet([{"from": 0, "label": "rdfs:label", "to": 1}, {"from": 2, "label": "owl:differentFrom", "to": 3}, {"from": 4, "label": "rdfs:range", "to": 5}, {"from": 6, "label": "rdf:type", "to": 7}, {"from": 8, "label": ":exposesPortToServices", "to": 9}, {"from": 10, "label": "owl:differentFrom", "to": 11}, {"from": 12, "label": "rdfs:subClassOf", "to": 13}, {"from": 14, "label": "rdf:type", "to": 15}, {"from": 16, "label": "rdf:type", "to": 17}, {"from": 18, "label": "rdf:type", "to": 17}, {"from": 0, "label": "rdfs:comment", "to": 19}, {"from": 20, "label": "rdfs:label", "to": 21}, {"from": 22, "label": "netw:ipAddressVersion", "to": 23}, {"from": 8, "label": "rdf:type", "to": 24}, {"from": 10, "label": "rdf:type", "to": 24}, {"from": 25, "label": "rdf:type", "to": 26}, {"from": 27, "label": "rdf:type", "to": 24}, {"from": 10, "label": "rdf:type", "to": 17}, {"from": 8, "label": "owl:differentFrom", "to": 2}, {"from": 27, "label": "rdf:type", "to": 17}, {"from": 28, "label": "rdf:type", "to": 29}, {"from": 30, "label": "rdfs:domain", "to": 12}, {"from": 31, "label": "rdfs:label", "to": 32}, {"from": 33, "label": "rdf:type", "to": 17}, {"from": 10, "label": "owl:differentFrom", "to": 2}, {"from": 34, "label": ":hasIPAddressValue", "to": 35}, {"from": 16, "label": "rdf:type", "to": 12}, {"from": 18, "label": "rdf:type", "to": 12}, {"from": 36, "label": "rdf:type", "to": 26}, {"from": 37, "label": "owl:differentFrom", "to": 11}, {"from": 38, "label": ":hasStaticIP", "to": 39}, {"from": 13, "label": "rdfs:comment", "to": 40}, {"from": 18, "label": "netw:ipAddressVersion", "to": 23}, {"from": 41, "label": "rdfs:comment", "to": 42}, {"from": 3, "label": "owl:differentFrom", "to": 11}, {"from": 27, "label": ":hasIPNetwork", "to": 43}, {"from": 25, "label": "rdfs:comment", "to": 44}, {"from": 22, "label": ":hasIPAddressValue", "to": 45}, {"from": 30, "label": "rdfs:label", "to": 46}, {"from": 43, "label": "rdf:type", "to": 6}, {"from": 4, "label": "rdfs:comment", "to": 47}, {"from": 25, "label": "rdfs:label", "to": 48}, {"from": 14, "label": "rdfs:domain", "to": 24}, {"from": 10, "label": ":hasStaticIP", "to": 33}, {"from": 49, "label": "x_1.1:creator", "to": 50}, {"from": 37, "label": "rdf:type", "to": 24}, {"from": 3, "label": "rdf:type", "to": 17}, {"from": 37, "label": "rdf:type", "to": 17}, {"from": 0, "label": "rdf:type", "to": 15}, {"from": 2, "label": "owl:differentFrom", "to": 11}, {"from": 51, "label": "rdfs:range", "to": 5}, {"from": 37, "label": "owl:differentFrom", "to": 2}, {"from": 30, "label": "rdf:type", "to": 15}, {"from": 34, "label": "netw:ipAddressVersion", "to": 23}, {"from": 2, "label": "rdf:type", "to": 24}, {"from": 3, "label": ":hasIPNetwork", "to": 43}, {"from": 6, "label": "rdfs:subClassOf", "to": 13}, {"from": 3, "label": ":hasStaticIP", "to": 18}, {"from": 27, "label": ":exposesPortToServices", "to": 52}, {"from": 53, "label": "rdf:type", "to": 17}, {"from": 38, "label": "owl:differentFrom", "to": 27}, {"from": 20, "label": "rdfs:comment", "to": 54}, {"from": 39, "label": "netw:belongsToIPNetwork", "to": 43}, {"from": 55, "label": "rdf:rest", "to": 56}, {"from": 16, "label": "netw:belongsToIPNetwork", "to": 43}, {"from": 3, "label": ":exposesPortToServices", "to": 52}, {"from": 37, "label": ":exposesPortToServices", "to": 52}, {"from": 57, "label": "rdfs:label", "to": 58}, {"from": 36, "label": "rdfs:domain", "to": 12}, {"from": 53, "label": "rdf:type", "to": 12}, {"from": 59, "label": ":hasIPNetwork", "to": 43}, {"from": 11, "label": "rdf:type", "to": 17}, {"from": 10, "label": "owl:differentFrom", "to": 37}, {"from": 60, "label": "rdf:type", "to": 29}, {"from": 33, "label": "netw:belongsToIPNetwork", "to": 43}, {"from": 11, "label": ":hasIPNetwork", "to": 43}, {"from": 41, "label": "rdfs:label", "to": 61}, {"from": 62, "label": "rdf:type", "to": 26}, {"from": 33, "label": ":hasIPAddressValue", "to": 63}, {"from": 8, "label": ":exposesPortToServices", "to": 64}, {"from": 8, "label": "owl:differentFrom", "to": 27}, {"from": 57, "label": "rdfs:comment", "to": 65}, {"from": 10, "label": "owl:differentFrom", "to": 27}, {"from": 2, "label": ":hasStaticIP", "to": 16}, {"from": 13, "label": "rdf:type", "to": 7}, {"from": 4, "label": "rdfs:domain", "to": 24}, {"from": 38, "label": "owl:differentFrom", "to": 59}, {"from": 66, "label": "rdfs:label", "to": 67}, {"from": 0, "label": "rdfs:range", "to": 6}, {"from": 25, "label": "rdfs:domain", "to": 24}, {"from": 36, "label": "rdfs:comment", "to": 68}, {"from": 53, "label": "netw:belongsToIPNetwork", "to": 43}, {"from": 30, "label": "rdfs:range", "to": 6}, {"from": 62, "label": "rdfs:domain", "to": 24}, {"from": 8, "label": ":hasStaticIP", "to": 69}, {"from": 34, "label": "rdf:type", "to": 17}, {"from": 3, "label": "rdf:type", "to": 24}, {"from": 10, "label": "owl:differentFrom", "to": 8}, {"from": 51, "label": "rdfs:label", "to": 70}, {"from": 33, "label": "rdf:type", "to": 12}, {"from": 2, "label": ":exposesPortToServices", "to": 64}, {"from": 22, "label": "netw:belongsToIPNetwork", "to": 43}, {"from": 6, "label": "rdfs:comment", "to": 71}, {"from": 38, "label": ":hasIPNetwork", "to": 43}, {"from": 34, "label": "rdf:type", "to": 12}, {"from": 53, "label": ":hasIPAddressValue", "to": 72}, {"from": 59, "label": "owl:differentFrom", "to": 11}, {"from": 6, "label": "rdfs:label", "to": 73}, {"from": 39, "label": "rdf:type", "to": 17}, {"from": 8, "label": "owl:differentFrom", "to": 59}, {"from": 41, "label": "rdfs:range", "to": 74}, {"from": 10, "label": "owl:differentFrom", "to": 59}, {"from": 75, "label": "owl:members", "to": 76}, {"from": 59, "label": "rdf:type", "to": 17}, {"from": 43, "label": ":hasSubnet", "to": 77}, {"from": 16, "label": ":hasIPAddressValue", "to": 78}, {"from": 11, "label": "rdf:type", "to": 24}, {"from": 38, "label": "owl:differentFrom", "to": 3}, {"from": 79, "label": "rdfs:label", "to": 80}, {"from": 69, "label": "netw:ipAddressVersion", "to": 23}, {"from": 66, "label": "rdfs:comment", "to": 81}, {"from": 30, "label": "rdfs:comment", "to": 82}, {"from": 62, "label": "rdfs:label", "to": 83}, {"from": 37, "label": "owl:differentFrom", "to": 59}, {"from": 8, "label": ":hasIPNetwork", "to": 43}, {"from": 20, "label": "rdfs:range", "to": 74}, {"from": 3, "label": ":exposesPortToServices", "to": 84}, {"from": 10, "label": ":hasIPNetwork", "to": 43}, {"from": 85, "label": "rdf:type", "to": 17}, {"from": 39, "label": "netw:ipAddressVersion", "to": 23}, {"from": 41, "label": "rdf:type", "to": 26}, {"from": 57, "label": "rdf:type", "to": 15}, {"from": 59, "label": ":hasStaticIP", "to": 22}, {"from": 20, "label": "rdf:type", "to": 26}, {"from": 27, "label": ":exposesPortToServices", "to": 64}, {"from": 59, "label": ":exposesPortToServices", "to": 52}, {"from": 51, "label": "rdfs:comment", "to": 86}, {"from": 27, "label": ":hasStaticIP", "to": 53}, {"from": 85, "label": "netw:ipAddressVersion", "to": 23}, {"from": 8, "label": "owl:differentFrom", "to": 3}, {"from": 14, "label": "rdfs:label", "to": 87}, {"from": 37, "label": ":hasIPNetwork", "to": 43}, {"from": 76, "label": "rdf:first", "to": 12}, {"from": 49, "label": "rdfs:comment", "to": 88}, {"from": 24, "label": "rdfs:comment", "to": 89}, {"from": 38, "label": "owl:differentFrom", "to": 11}, {"from": 3, "label": "owl:differentFrom", "to": 27}, {"from": 37, "label": ":exposesPortToServices", "to": 64}, {"from": 3, "label": ":exposesPortToServices", "to": 64}, {"from": 37, "label": "owl:differentFrom", "to": 27}, {"from": 62, "label": "rdfs:comment", "to": 90}, {"from": 11, "label": ":exposesPortToServices", "to": 84}, {"from": 76, "label": "rdf:rest", "to": 91}, {"from": 92, "label": "rdf:type", "to": 29}, {"from": 51, "label": "rdf:type", "to": 26}, {"from": 20, "label": "rdfs:domain", "to": 6}, {"from": 36, "label": "rdfs:label", "to": 93}, {"from": 38, "label": "rdf:type", "to": 17}, {"from": 4, "label": "rdfs:label", "to": 94}, {"from": 2, "label": "owl:differentFrom", "to": 27}, {"from": 27, "label": "owl:differentFrom", "to": 59}, {"from": 69, "label": ":hasIPAddressValue", "to": 95}, {"from": 75, "label": "rdf:type", "to": 96}, {"from": 13, "label": "rdfs:subClassOf", "to": 31}, {"from": 22, "label": "rdf:type", "to": 17}, {"from": 18, "label": "netw:belongsToIPNetwork", "to": 43}, {"from": 12, "label": "rdfs:comment", "to": 97}, {"from": 11, "label": ":exposesPortToServices", "to": 98}, {"from": 59, "label": "rdf:type", "to": 24}, {"from": 85, "label": "netw:belongsToIPNetwork", "to": 43}, {"from": 51, "label": "rdfs:domain", "to": 24}, {"from": 14, "label": "rdfs:comment", "to": 99}, {"from": 25, "label": "rdfs:range", "to": 74}, {"from": 14, "label": "rdfs:range", "to": 12}, {"from": 69, "label": "rdf:type", "to": 17}, {"from": 8, "label": "owl:differentFrom", "to": 11}, {"from": 37, "label": ":hasStaticIP", "to": 34}, {"from": 11, "label": ":hasStaticIP", "to": 85}, {"from": 62, "label": "rdfs:range", "to": 5}, {"from": 85, "label": ":hasIPAddressValue", "to": 100}, {"from": 31, "label": "rdfs:comment", "to": 101}, {"from": 39, "label": "rdf:type", "to": 12}, {"from": 22, "label": "rdf:type", "to": 12}, {"from": 34, "label": "netw:belongsToIPNetwork", "to": 43}, {"from": 36, "label": "rdfs:range", "to": 74}, {"from": 49, "label": "rdf:type", "to": 102}, {"from": 8, "label": "rdf:type", "to": 17}, {"from": 69, "label": "rdf:type", "to": 12}, {"from": 3, "label": "owl:differentFrom", "to": 59}, {"from": 24, "label": "rdfs:subClassOf", "to": 13}, {"from": 55, "label": "rdf:first", "to": 24}, {"from": 16, "label": "netw:ipAddressVersion", "to": 23}, {"from": 18, "label": ":hasIPAddressValue", "to": 103}, {"from": 49, "label": "owl:versionIRI", "to": 104}, {"from": 12, "label": "rdfs:label", "to": 105}, {"from": 49, "label": "owl:versionInfo", "to": 106}, {"from": 39, "label": ":hasIPAddressValue", "to": 107}, {"from": 79, "label": "rdfs:range", "to": 74}, {"from": 43, "label": "rdf:type", "to": 17}, {"from": 2, "label": "owl:differentFrom", "to": 59}, {"from": 24, "label": "rdfs:label", "to": 108}, {"from": 79, "label": "rdf:type", "to": 26}, {"from": 12, "label": "rdf:type", "to": 7}, {"from": 85, "label": "rdf:type", "to": 12}, {"from": 8, "label": ":exposesPortToServices", "to": 52}, {"from": 10, "label": "owl:differentFrom", "to": 3}, {"from": 2, "label": "rdf:type", "to": 17}, {"from": 8, "label": "owl:differentFrom", "to": 38}, {"from": 33, "label": "netw:ipAddressVersion", "to": 23}, {"from": 10, "label": "owl:differentFrom", "to": 38}, {"from": 31, "label": "rdf:type", "to": 7}, {"from": 41, "label": "rdfs:domain", "to": 12}, {"from": 79, "label": "rdfs:comment", "to": 109}, {"from": 13, "label": "rdfs:label", "to": 110}, {"from": 69, "label": "netw:belongsToIPNetwork", "to": 43}, {"from": 38, "label": "rdf:type", "to": 24}, {"from": 2, "label": ":hasIPNetwork", "to": 43}, {"from": 91, "label": "rdf:rest", "to": 55}, {"from": 79, "label": "rdfs:domain", "to": 24}, {"from": 38, "label": "owl:differentFrom", "to": 2}, {"from": 37, "label": "owl:differentFrom", "to": 3}, {"from": 53, "label": "netw:ipAddressVersion", "to": 23}, {"from": 0, "label": "rdfs:domain", "to": 24}, {"from": 8, "label": "owl:differentFrom", "to": 37}, {"from": 37, "label": "owl:differentFrom", "to": 38}, {"from": 24, "label": "rdf:type", "to": 7}, {"from": 4, "label": "rdf:type", "to": 26}, {"from": 66, "label": "rdf:type", "to": 26}, {"from": 2, "label": ":exposesPortToServices", "to": 52}, {"from": 27, "label": "owl:differentFrom", "to": 11}, {"from": 59, "label": ":exposesPortToServices", "to": 64}, {"from": 91, "label": "rdf:first", "to": 6}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "physics"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "forceAtlas2Based": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.01,
+            "damping": 0.4,
+            "gravitationalConstant": -50,
+            "springConstant": 0.08,
+            "springLength": 100
+        },
+        "solver": "forceAtlas2Based",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+                  // if this network requires displaying the configure window,
+                  // put it in its div
+                  options.configure["container"] = document.getElementById("config");
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+                      network.on("stabilizationProgress", function(params) {
+                          document.getElementById('loadingBar').removeAttribute("style");
+                          var maxWidth = 496;
+                          var minWidth = 20;
+                          var widthFactor = params.iterations/params.total;
+                          var width = Math.max(minWidth,maxWidth * widthFactor);
+                          document.getElementById('bar').style.width = width + 'px';
+                          document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+                      });
+                      network.once("stabilizationIterationsDone", function() {
+                          document.getElementById('text').innerHTML = '100%';
+                          document.getElementById('bar').style.width = '496px';
+                          document.getElementById('loadingBar').style.opacity = 0;
+                          // really clean the dom element
+                          setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+                      });
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

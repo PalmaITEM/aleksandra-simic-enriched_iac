@@ -9,7 +9,7 @@ Moreover, we designed the Data Parsing and Populating Module for populating the 
 
 ## Project overview
 This repository contains the supplementary material for this master's thesis. 
-It consists of the Container Networking Ontology in XML and Turtle format, in two versions, with and without properties defined for integration of SWRL rules.
+It consists of the Container Networking Ontology in RDF/XML and Turtle format, in two versions, with and without properties defined for integration of SWRL rules.
 Knowledge bases for each use case are also available in two formats: populated ontology with data from Docker Compose files (1) and extended knowledge base with SWRL rules (2). 
 Knowledge graphs are available in HTML format, while it is recommended to open them in any of the browsers for interactive navigation and detail inspection. 
 
@@ -27,7 +27,7 @@ This repository is organized as follows:
     - [Free5GC](Free5GC-KB/) with populated knowledge base, extended with SWRL rules and knowledge graph files.
     - [OAI5GC](OAI5GC-KB/) with populated knowledge base, extended with SWRL rules and knowledge graph files.
 
-- The core of the parsing script responisble for the creation of knowledge bases is available at [Data Parsing and Populating Module](). 
+- The core of the parsing script responsible for the creation of knowledge bases (Data Parsing and Populating Module) and the script used for knowledge graphs creation can be found [here](Scripts/). 
 
 
 ## Contact details 
