@@ -9,7 +9,7 @@ Moreover, we designed the Data Parsing and Populating Module for populating the 
 
 ## Project overview
 This repository contains the supplementary material for this master's thesis. 
-It consists of the Container Networking Ontology in RDF/XML and Turtle format, in two versions, with and without properties defined for integration of SWRL rules.
+It consists of the Container Networking Ontology in RDF/XML and Turtle formats, in two versions, with and without properties defined for integration of SWRL rules.
 Knowledge bases for each use case are also available in two formats: populated ontology with data from Docker Compose files (1) and extended knowledge base with SWRL rules (2). 
 Knowledge graphs are available in HTML format, while it is recommended to open them in any of the browsers for interactive navigation and detail inspection. 
 
