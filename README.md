@@ -17,15 +17,15 @@ Knowledge graphs are available in HTML format, while it is recommended to open t
 ## Project structure
 This repository is organized as follows:
 
-- The foundational and extended version with properties for verifying rules can be found here [Container Networking Ontology](Container-Networking-Ontology/). 
+- The foundational and extended version with properties for verifying rules can be found at [Container Networking Ontology](Container-Networking-Ontology/). 
 
 - The knowledge bases built based on the [Awesome Docker Compose samples](https://github.com/docker/awesome-compose), multi integrated services, according to the naming used in the thesis, are:
-    - [All 21](All-21-KB/) with populated knowledge base, extended with SWRL rules and knowledge graph files. 
-    - [App 1](App-1-KB/) with populated knowledge base, extended with SWRL rules and knowledge graph files.
-    - [App 2](App-2-KB/) with populated knowledge base, extended with SWRL rules and knowledge graph files.
-- The files complementing 5G Core Network use cases, based on [Free5GC](https://github.com/free5gc/free5gc-compose/blob/d04baa57a6e4c9a2c4af8a223bad984299d100b7/docker-compose.yaml) and [OAI Basic 5G](https://gitlab.eurecom.fr/oai/cn5g/oai-cn5g-fed/-/blob/94ecfac7476114f730e1b555779a20b3e78d77f0/docker-compose/docker-compose-basic-nrf.yaml) are available at:
-    - [Free5GC](Free5GC-KB/) with populated knowledge base, extended with SWRL rules and knowledge graph files.
-    - [OAI5GC](OAI5GC-KB/) with populated knowledge base, extended with SWRL rules and knowledge graph files.
+    - [All 21](All-21-KB/) with the populated knowledge base, extended with SWRL rules and knowledge graph files. 
+    - [App 1](App-1-KB/) with the populated knowledge base, extended with SWRL rules and knowledge graph files.
+    - [App 2](App-2-KB/) with the populated knowledge base, extended with SWRL rules and knowledge graph files.
+- The files complementing 5G Core Network use cases, based on [Free5GC](https://github.com/free5gc/free5gc-compose/blob/d04baa57a6e4c9a2c4af8a223bad984299d100b7/docker-compose.yaml) and [OAI Basic 5G](https://gitlab.eurecom.fr/oai/cn5g/oai-cn5g-fed/-/blob/94ecfac7476114f730e1b555779a20b3e78d77f0/docker-compose/docker-compose-basic-nrf.yaml), are available at:
+    - [Free5GC](Free5GC-KB/) with the populated knowledge base, extended with SWRL rules and knowledge graph files.
+    - [OAI5GC](OAI5GC-KB/) with the populated knowledge base, extended with SWRL rules and knowledge graph files.
 
 - The core of the parsing script responsible for the creation of knowledge bases (Data Parsing and Populating Module) and the script used for knowledge graphs creation can be found [here](Scripts/). 
 
