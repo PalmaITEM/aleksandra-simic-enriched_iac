@@ -1,3 +1,6 @@
+
+**Web-version [here](https://palmaitem.github.io/kgcompliance/)**
+
 # Using Knowledge Graphs to Automate Network Compliance of Containerized Services
 
 ## Abstract
