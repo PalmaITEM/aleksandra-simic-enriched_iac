@@ -2,7 +2,15 @@
 
 ## Abstract
 
-TODO
+Information and Communication Technology (ICT) infrastructures are increasingly adopting software-based approaches, using paradigms such as Infrastructure as Code (IaC).  
+This is aligned with the design of modern systems, such as 5G with the use of Virtual Network Functions (VNFs) and containerized services, combining the expertise and participation of various stakeholders from diverse cultural and educational backgrounds, potentially across different organizations. 
+Such organizations depend on efficient knowledge management to overcome the interoperability challenges arising from both technical and organizational complexity. 
+To create a common understanding of containerized networking infrastructures, we developed an ontology that allows a unified representation of core networking concepts. 
+By enriching pre-deployment tasks with semantics, we universally represented and verified different network policies based on formal logic. 
+To validate our approach, we constructed two knowledge graphs using open-source 5G Core Network implementations and demonstrated the potential of our approach by checking for compliance with automated reasoning. 
+Using our defined rules, we extracted knowledge about non-compliant services and made inferences based on the well-defined concepts in the ontology. 
+Our findings suggest that different network security policies can be integrated into each knowledge base, contributing to autonomic and cognitive management of future infrastructures. 
+This can potentially provide more reliable IaC definitions, improve machine interpretation of IaC deployments, and assist human actors in making better-informed decisions.
 
 ## Results overview
 
